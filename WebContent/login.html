@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户登录</title>
+
+</head>
+<body>
+<div class="container-fluid" style="padding-left: 0;">
+		<div class="row-fluid">
+			<div class="col-md-2 col-lg-2"></div>
+			<div class="col-xs-12 col-md-8 col-lg-8">
+				<h2 align="center">用户登录</h2>
+				<form name="myForm" method="post" action="LoginServlet">
+					<table align="center">
+						<tr>
+							<td>
+								<div class="input-group">
+									
+									账号：<input type="text" name="username" id="username" class="form-control"  size="25" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="input-group">
+									
+									密码：<input type="password" name="password" id="password"  class="form-control" size="25" />
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>我是:<span>
+								<select name="role" id="role"
+									class="selector form-control" style="width:30;">
+									<option value="1">学生</option>
+				
+									<option value="3">管理员</option>
+								</select></span>
+							</td>
+						</tr>
+						<tr>
+						</tr>
+						<tr>
+							<td><button type="button" class="btn btn-block btn-primary" onclick="sub();">登录</button></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="col-md-2 col-lg-2"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="js/icheck.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.getJSON("ReadCookies", function(jsonData) {
+		if(jsonData.auto==true){
+			$("#username").val(jsonData.username);
+			$("#password").val(jsonData.password);
+			$("option[value='"+jsonData.role+"']").attr("selected","selected");
+			$("#auto").attr("checked","checked");
+			$('input').iCheck({
+			    checkboxClass: 'icheckbox_square-blue',
+			    radioClass: 'iradio_square-blue',
+			    increaseArea: '20%'
+			});
+		}
+	});
+	$('input').iCheck({
+	    checkboxClass: 'icheckbox_square-blue',
+	    radioClass: 'iradio_square-blue',
+	    increaseArea: '20%'
+	});
+});
+
+function sub(){
+	$(".checked").children("#auto").attr("checked","checked");
+	myForm.submit();
+}
+</script>
+</html>
